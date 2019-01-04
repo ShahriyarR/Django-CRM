@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mwx@&97%!$fx_*zgj(2ygi^(s=oh5j(cqb$=+-mkd9scbt!0v0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -68,19 +68,29 @@ WSGI_APPLICATION = 'crm.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
+#
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dj_crm',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'tech_crm',
+        'USER': 'root',
+        'PASSWORD': '12345',
         'HOST': '127.0.0.1',
-        'PORT': '5432'
+        'PORT': '3306'
     }
 }
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), ]
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'dj_crm',
+#         'USER': 'postgres',
+#         'PASSWORD': 'root',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432'
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -105,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Calcutta'
+TIME_ZONE = 'Asia/Baku'
 
 USE_I18N = True
 
@@ -116,8 +126,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -127,23 +135,38 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend', )
 
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = os.getenv('SG_USER', '')
-EMAIL_HOST_PASSWORD = os.getenv('SG_PWD', '')
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST_USER = os.getenv('SG_USER', '')
+# EMAIL_HOST_PASSWORD = os.getenv('SG_PWD', '')
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'cavidan.mahmudoglu@gmail.com'
+EMAIL_HOST_PASSWORD = 'zaur5230'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 AUTH_USER_MODEL = 'common.User'
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (BASE_DIR + '/static',)
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
+
+STATIC_URL = '/static/'
+if DEBUG:
+  STATICFILES_DIRS = [
+  os.path.join(BASE_DIR, "static"),
+  ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR,"static")
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 COMPRESS_ROOT = BASE_DIR + '/static/'
 COMPRESS_URL = STATIC_URL
@@ -166,9 +189,9 @@ COMPRESS_OFFLINE_CONTEXT = {
     'STATIC_URL': 'STATIC_URL',
 }
 
-DEFAULT_FROM_EMAIL = 'no-reply@django-crm.micropyramid.com'
-MAIL_SENDER = 'AMAZON'
-INACTIVE_MAIL_SENDER = 'MANDRILL'
+# DEFAULT_FROM_EMAIL = 'no-reply@django-crm.micropyramid.com'
+# MAIL_SENDER = 'AMAZON'
+# INACTIVE_MAIL_SENDER = 'MANDRILL'
 
 AM_ACCESS_KEY = os.getenv('AM_ACCESS_KEY', '')
 AM_PASS_KEY = os.getenv('AM_PASS_KEY', '')

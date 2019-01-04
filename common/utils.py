@@ -46,12 +46,18 @@ ROLES = (
     ('USER', 'USER'),
 )
 
+# LEAD_STATUS = (
+#     ('assigned', 'Assigned'),
+#     ('in process', 'In Process'),
+#     ('converted', 'Converted'),
+#     ('recycled', 'Recycled'),
+#     ('dead', 'Dead')
+# )
+
 LEAD_STATUS = (
-    ('assigned', 'Assigned'),
-    ('in process', 'In Process'),
-    ('converted', 'Converted'),
-    ('recycled', 'Recycled'),
-    ('dead', 'Dead')
+    ('application', 'Application'),
+    ('candidate', 'Candidate'),
+    ('student', 'Student'),
 )
 
 
